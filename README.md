@@ -117,4 +117,4 @@ data points $x_i$ and $x_j$, $p_{j|i}$ and $q_{j|i}$ will be similar as well, re
 
 Putting it all together, a visualization of the resulting data after t_sne has been applied is shown below.
 
-![cluster_n10_i00_saved.png](cluster_n10_i00_saved.png?raw=true "cluster_n10" )
+![cluster_n10_i00_saved.png](atomic-edit-challenge/cluster_n10_i00_saved.png?raw=true "cluster_n10" )
