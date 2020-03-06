@@ -116,5 +116,14 @@ data points $x_i$ and $x_j$, $p_{j|i}$ and $q_{j|i}$ will be similar as well, re
 # Visualization
 
 Putting it all together, a visualization of the resulting data after t_sne has been applied is shown below.
+To save on computation, only the first 1000 phrases in the wiki_edits insertions file have been computed.
 
 ![cluster_n10_i00_saved.png](atomic-edit-challenge/cluster_n10_i00_saved.png?raw=true "cluster_n10" )
+
+The colors represent different clusters. Some example text has been included to somewhat show the text in
+the groups. We can see that with ten clusters, some groups do appear. The number of members in each
+group is unbalanced and some groups don't cluster nicely, such as cluster 0. This could be due to
+limitations in visualizing a higher dimensional data, adjusts to variables used in the algorithms,
+or inherit in the original data.
+
+In summary, tf-idf, PCA, k-means, and t-sne we performed on textual data to cluster and visualize the data.
