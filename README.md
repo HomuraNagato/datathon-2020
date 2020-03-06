@@ -24,13 +24,19 @@ Use sklearn's TfidVectorizer to convert a list of strings to an embedding vector
 TfidVectorizer first learns a vocabulary from input text = embedding_size. The formula to
 calculate a word's tf-idf is below (reformated in probability terms):
 
-<!-- perhaps this comment will work? -->
+ perhaps this comment will work? -->
 
-[comment]: <> idf(t|d) = log(\frac{1 + n}{1 + df(t)}) + 1
+<!--
+\[
+idf(t|d) = log(\frac{1 + n}{1 + df(t)}) + 1
+\[
+-->
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=idf(t|d)&space;=&space;log(\frac{1&space;&plus;&space;n}{1&space;&plus;&space;df(t)})&space;&plus;&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?idf(t|d)&space;=&space;log(\frac{1&space;&plus;&space;n}{1&space;&plus;&space;df(t)})&space;&plus;&space;1" title="idf(t|d) = log(\frac{1 + n}{1 + df(t)}) + 1" /></a>
 
-[comment]: # tf-idf(t|d) = df(t|d) * idf(t|d)
+<!-- \[
+tf-idf(t|d) = df(t|d) * idf(t|d)
+\] -->
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=tf-idf(t|d)&space;=&space;df(t|d)&space;*&space;idf(t|d)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?tf-idf(t|d)&space;=&space;df(t|d)&space;*&space;idf(t|d)" title="tf-idf(t|d) = df(t|d) * idf(t|d)" /></a>
 
@@ -54,9 +60,11 @@ Now that we vectorized our text, we wish to cluster. k-means transforms a vector
 [n_samples, embedding_size] to [n_samples, k], where $k$ are the number of clusters. The
 formula used by sklearn is below
 
-\[
- sum_{i=0}^{n} {min_{\mu_j \in C} (||x_i - \mu_j||^2)}
-\]
+<!-- \[
+ \sum_{i=0}^{n} {min_{\mu_j \in C} (||x_i - \mu_j||^2)}
+\] -->
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{i=0}^{n}&space;{min_{\mu_j&space;\in&space;C}&space;(||x_i&space;-&space;\mu_j||^2)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{i=0}^{n}&space;{min_{\mu_j&space;\in&space;C}&space;(||x_i&space;-&space;\mu_j||^2)}" title="\sum_{i=0}^{n} {min_{\mu_j \in C} (||x_i - \mu_j||^2)}" /></a>
 
 This formula attempts to separate samples by inertia, or the within-cluster sum-of-squares. The
 algorithm computes centroids with a stopping value when the computed centroids move less than
@@ -74,25 +82,31 @@ k-means < 50, this satisfies this constraint.
 
 The full cost function is below
 
-\[
+<!-- \[
  C = \sum_i {KL(P_i | Q_i)} = \sum_i \sum_j {p_{j|i} \log{\frac{p_{j|i}}{q_{j|i}}}} 
-\]
+\] -->
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=C&space;=&space;\sum_i&space;{KL(P_i&space;|&space;Q_i)}&space;=&space;\sum_i&space;\sum_j&space;{p_{j|i}&space;\log{\frac{p_{j|i}}{q_{j|i}}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C&space;=&space;\sum_i&space;{KL(P_i&space;|&space;Q_i)}&space;=&space;\sum_i&space;\sum_j&space;{p_{j|i}&space;\log{\frac{p_{j|i}}{q_{j|i}}}}" title="C = \sum_i {KL(P_i | Q_i)} = \sum_i \sum_j {p_{j|i} \log{\frac{p_{j|i}}{q_{j|i}}}}" /></a>
 
 $P_i$ is the conditional probability distribution over all other data points given data point (represented
 as a vector of dimensional data) $x_i$. $Q_i$ is the conditional probability distribution over all other
 data points given map point $q_i$.
 
-\[
+<!-- \[
  p_{j|i} = \frac{e^{-||x_i-x_j||^2 / 2 \sigma_i^2 }}{\sum_{k \neq i} e^{-||x_i-x_k||^2 / 2 \sigma_i^2}}
-\]
+\] -->
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=p_{j|i}&space;=&space;\frac{e^{-||x_i-x_j||^2&space;/&space;2&space;\sigma_i^2&space;}}{\sum_{k&space;\neq&space;i}&space;e^{-||x_i-x_k||^2&space;/&space;2&space;\sigma_i^2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p_{j|i}&space;=&space;\frac{e^{-||x_i-x_j||^2&space;/&space;2&space;\sigma_i^2&space;}}{\sum_{k&space;\neq&space;i}&space;e^{-||x_i-x_k||^2&space;/&space;2&space;\sigma_i^2}}" title="p_{j|i} = \frac{e^{-||x_i-x_j||^2 / 2 \sigma_i^2 }}{\sum_{k \neq i} e^{-||x_i-x_k||^2 / 2 \sigma_i^2}}" /></a>
 
 This says $p_{j|i}$ the conditional probability data point $x_i$ would choose $x_j$ as its neighbor under
 a Gaussian centered at $x_i$. For nearby points, this probability will be larger, and for points far away,
 this probability will be smaller. We set $x_{i|i} = 0$.
 
-\[
+<!-- \[
  q_{j|i} = \frac{e^{-||y_i-y_j||^2  }}{\sum_{k \neq i} e^{-||y_i-y_k||^2 }}
-\]
+\] -->
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=q_{j|i}&space;=&space;\frac{e^{-||y_i-y_j||^2&space;}}{\sum_{k&space;\neq&space;i}&space;e^{-||y_i-y_k||^2&space;}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?q_{j|i}&space;=&space;\frac{e^{-||y_i-y_j||^2&space;}}{\sum_{k&space;\neq&space;i}&space;e^{-||y_i-y_k||^2&space;}}" title="q_{j|i} = \frac{e^{-||y_i-y_j||^2 }}{\sum_{k \neq i} e^{-||y_i-y_k||^2 }}" /></a>
 
 Similarly, q_{j|i} is the conditional probability map point $y_i$ would choose $y_j$ as its neighbor.
 
@@ -103,4 +117,4 @@ data points $x_i$ and $x_j$, $p_{j|i}$ and $q_{j|i}$ will be similar as well, re
 
 Putting it all together, a visualization of the resulting data after t_sne has been applied is shown below.
 
-![cluster_n10_i00_saved.png][cluster_n10_i00_saved.png?raw=true "cluster_n10" ]
+![cluster_n10_i00_saved.png](cluster_n10_i00_saved.png?raw=true "cluster_n10" )
