@@ -1,0 +1,4 @@
+
+\[
+ C = \sum_i {KL(P_i | Q_i)} = \sum_i \sum_j {p_{j|i} \log{\fraq{p_{j|i}}{q_{j|i}}}}
+\]
